@@ -10,7 +10,7 @@ main_menu = ['1. View Balance',
              '2. Deposit',
              '3. Withdrawal',
              '4. Change Password',
-             '5. Exit'
+             '5. Logout'
              ]
 
 balance = float(0)
@@ -39,6 +39,7 @@ def displayMainMenu():
     print(main_menu[1])
     print(main_menu[2])
     print(main_menu[3])
+    print(main_menu[4])
 
 
 def changePwd(old_pwd, new_pwd):
@@ -52,32 +53,42 @@ def changePwd(old_pwd, new_pwd):
 print(welcome)
 
 while login_screen == True:
+
     displayLoginMenu()
+
     # ask user for their login menu choice
     userLoginChoice = input()
+
     # if user chooses Login, ask user for credentials
     if (userLoginChoice == '1'):
         print('Enter your credentials to login.')
         login_id = input('Please enter your username: ')
         login_pwd = input('Please enter your password: ')
+
         if (login_id == userName and login_pwd == userPassword):
             print('Welcome to your account!')
             login_screen = False
+
         else:
             print('Username or password is incorrect.')
+
     # if user chooses Create Account
     elif (userLoginChoice == '2'):
         print('Please choose a username and password.')
         userName = input('Please enter a username: ')
         userPassword = input('Please enter a password: ')
+
     # if user chooses Exit
     else:
         print(leave)
         login_screen = False
 
 while main_screen == True:
+
     displayMainMenu()
+
     userMainMenuChoice = input()
+
     # 1 for balance
     if (userMainMenuChoice == '1'):
         print(f'Your balance is ${balance}')
@@ -98,7 +109,8 @@ while main_screen == True:
         except ValueError:
             print('Please enter a valid number.')
 
-    else:
+    # change pwd
+    elif (userMainMenuChoice == '4'):
         current_pwd = input('Please enter your current password: ')
         new_pwd = input(
             'Please enter your new password. It cannot be the same as your existing password: '
@@ -106,3 +118,8 @@ while main_screen == True:
         changePwd(current_pwd, new_pwd)
         userPassword = new_pwd
         print('current password: ' + userPassword)
+
+    # logout
+    else:
+        print(leave)
+        main_screen = False
